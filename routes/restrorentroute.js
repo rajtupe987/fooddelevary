@@ -12,7 +12,7 @@ require("dotenv").config();
 restoRoute.get("/restaurants",async(req,res)=>{
     try {
         const data=await restomodel.find();
-        res.send(data)
+        res.status(200).send(data)
     } catch (error) {
         res.send(error)
     }
@@ -23,12 +23,10 @@ restoRoute.post("/restaurants",async(req,res)=>{
     try {
         const {name,address,menu}=req.body;
 
-
-
             const restorents=new restomodel({name,address,menu});
 
             await restorents.save()
-            return res.status(201).send({"msg":"registerd seccessfully",restro:restorents})
+            return res.status(200).send({"msg":"registerd seccessfully",restro:restorents})
         
 
     } catch (error) {
@@ -43,7 +41,7 @@ restoRoute.get("/restaurants/:id",async(req,res)=>{
     try {
        const data= await restomodel.findById({_id:userid});
        
-       res.status(201).send({"msg":"success",data})
+       res.status(200).send({"msg":"success",data})
     } catch (error) {
         res.status(400).send({"msg":error.messge})
     }
@@ -78,7 +76,7 @@ restoRoute.post('/restaurants/:id/menu', (req, res) => {
         return restaurant.save();
       })
       .then(updatedRestaurant => {
-        res.status(200).json(updatedRestaurant);
+        res.status(201).json(updatedRestaurant);
       })
       .catch(error => {
         res.status(500).json({ error: 'Failed to add menu item' });

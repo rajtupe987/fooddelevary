@@ -9,14 +9,14 @@ const userRoute=express.Router();
 require("dotenv").config();
 
 
-userRoute.get("/",async(req,res)=>{
-    try {
-        const data=await userModel.find();
-        res.send(data)
-    } catch (error) {
-        res.send(error)
-    }
-})
+// userRoute.get("/",async(req,res)=>{
+//     try {
+//         const data=await userModel.find();
+//         res.send(data)
+//     } catch (error) {
+//         res.send(error)
+//     }
+// })
 
 
 userRoute.post("/register",async(req,res)=>{
@@ -90,7 +90,7 @@ userRoute.patch("/user/:id/reset",async(req,res)=>{
        
        
        
-       res.status(201).send({"msg":"data reset success",data})
+       res.status(204).send({"msg":"data reset success",data})
     } catch (error) {
         res.status(400).send({"msg":error.messge})
     }
